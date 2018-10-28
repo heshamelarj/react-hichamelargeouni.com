@@ -1,0 +1,351 @@
+/*----------------------------
+**                           **
+**       Components          **
+**                           **
+----------------------------*/
+==>introduction
+a component is a very small part of the app UI and it can be as simple as a Button or complex as a ProductList
+
+----------------------------
+      CREATE COMPONENT
+----------------------------
+
+--> using ES6 class syntax 
+____________________________________________________________________
+class App extends Component {
+  render() {
+    return (
+      <div className="App">
+        < a > < i className = "fa fa-behance fa-2x" > </i> </a >
+      </div>
+    );
+  }
+}
+____________________________________________________________________
+
+--> usign React.createClass method
+____________________________________________________________________
+const App = React.createClass({
+  render(){
+    return (
+      <div className="App">
+        < a > < i className = "fa fa-behance fa-2x" > </i> </a >
+      </div>
+    )
+  }
+})
+--------------------------
+        JSX SYNTAX
+--------------------------
+#- JavaScript eXtension syntax
+#- it's a JavaScript like syntax written by Facebook.
+#- it's HTML-like syntax in the end is compiled down to Vanilla JavaScript.
+return (
+      <div className="App">
+        < a > < i className = "fa fa-behance fa-2x" > </i> </a >
+      </div>
+    )
+
+===>P.S: if we didn't use render() method we can't benefit from the advantages of JSX
+===>P.P.S: when dealing with <img> you need to require the img src to webpack so it will load it <img src={require('../img/logo.png')}
+----------------------------
+    Importing Components			
+----------------------------
+Extension:JSX---------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+//component.jsx//
+
+  import React, { Component } from "react";
+  export class DevidingBar extends Component{
+    render(){
+      return (
+        <nav className="header">
+            <ul className = "header__nav" >
+            
+            </ul>
+          </nav>
+      );
+    }
+  }
+//main.js//
+  import React, { Component } from "react";
+  import {DevidingBar} from './sections/components';
+  class App extends Component {
+  render() {
+    return (
+      <React.Fragment>
+        <ResponsiveMenu />
+        <Navbar />
+        <Section />
+        <DevidingBar />
+      </React.Fragment>
+    );
+  }
+}
+
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+
+------------------------------
+EMBEDDING INLINE SVG USING JSX
+------------------------------
+
+#- to do this you need to use dangerouslySetInnerHTML = {{__html: 'your svg'}}
+          <a className="menu__fullscreen__menu--close" id="closeFullscreenMenu" dangerouslySetInnerHTML={{__html: '<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="70px" height="43px" viewBox="0 0 70 43" enable-background="new 0 0 70 43" xml:space="preserve"> <g className="menu-bars"> <line id="bar-3" fill="none" stroke="#C68952" stroke-width="5" stroke-miterlimit="10" x1="6" y1="11.5" x2="64" y2="11.5"/> <line id="bar-2" fill="none" stroke="#C68952" stroke-width="5" stroke-miterlimit="10" x1="6" y1="21.5" x2="64" y2="21.5"/> <line id="bar-1" fill="none" stroke="#C68952" stroke-width="5" stroke-miterlimit="10" x1="6" y1="31.5" x2="64" y2="31.5"/> </g> </svg>'}}>
+
+----------------------------
+      React.Fragment
+----------------------------
+
+#- this is the container for the component
+#- although you can use it to return multiple components
+
+----------------------------
+    Data-Driven Component			
+----------------------------
+#- we create a seed.js file to store a protype of how the works data-model should be.
+
+Extension:JS ---------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+  const works = [
+  {
+    id: 1,
+    imgUrl: '../../img/bg.jpg',
+    caption: 'this project was developped using the Vuejs and fullpagejs'
+  }
+]		
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+
+----------------------------
+        using Props			
+----------------------------
+#- we want to modify our Work component so that it no longer uses static, hard-coded attributes.instead, we want it to be able to accept data passed down from its parent (WorkList).
+#- the way data flows from parent to child in React is through (Props), when a parent renders a child it can send along props that the child depends on.
+#- this.props is immutable.
+----------------------------
+    Mulptiple-Components			
+----------------------------
+----------------------------
+    create ProjectList			
+----------------------------
+
+#- we create the seed.js file that holds the data of the projects 
+
+Extension:JS ---------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+export const projects = [
+  {
+    id: 1,
+    imgUrl: '../../img/bg.jpg',
+    desc: 'this project was developped using the Vuejs and fullpagejs'
+  },
+  {
+    id: 2,
+    imgUrl: '../../img/bg_1.jpg',
+    desc: 'this project was developped using the Laravel and React'
+  },
+  {
+    id: 3,
+    imgUrl: '../../img/bg_2.jpg',
+    desc: 'this project was developped using the Symfony and vuejs '
+  },
+  {
+    id: 4,
+    imgUrl: '../../img/bg_3.jpg',
+    desc: 'this project was developped using the Vuejs and nodejs'
+  },
+  {
+    id: 5,
+    imgUrl: '../../img/bg_4.jpg',
+    desc: 'this project is under developpement'
+  }
+];
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+#- we import those projects to the /presentation/section/work/components.jsx
+
+Extension:JSX---------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+class Project extends Component {
+  render() {
+    return (
+      
+      <div className="work__body__grid__item-xs-12">
+        <div className="work__body__grid__item">
+          <div className="project">
+            <div className={"project__" + this.props.projectId + "__thumbnail"}>
+              <div className="project__thumbnail__overlay">
+              </div>
+            </div>
+            <div className="project__desc">
+              <p>
+                {/*TODO: load description data for every project */}
+                {this.props.projectDesc}
+              </p>
+              <a href="#" className="project__thumbnail__button">More</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    );
+  }
+}
+export class ProjectList extends Component {
+  render() {
+    const projectsComponents = projects.map((project) => (
+      <Project 
+      key = {'project-'+project.id}
+      projectId = {project.id}
+      projectDesc = {project.desc}
+      />
+    ))
+    return (
+      <div className="work__body__grid">
+        <div className="grid__row">
+          {projectsComponents}     
+        </div>
+      </div>
+    );
+  }
+}
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+#- as you can see we created a {Project} Component then in the {ProjectList} we specify what props the {ProjectList} will pass to {Project} and in the same time we create a {ProjectComponents} array to pass it to the return statement using map() function  
+----------------------------
+      Sorting Blogs			
+----------------------------
+
+#- to sort blogs by date we add the following line of code :
+Extension:JS ---------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+const blogsArray = blogs.sort((a,b) => (
+  new Date(a.date) - new Date(b.date)
+));
+const BlogComponents = blogsArray.map((blog)=>(
+  ...
+))	
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+NOTE: P.S: sort() mutates the original array it's nor a good practice
+
+----------------------------
+    Create and Interation			
+----------------------------
+NOTE: the child can't modify the thi.props.x property it's owned by the parent not the child
+#- the trick here is to make the parent know that we wan't to update a child's prop and update it .
+#- to to this we will use a function in the parent Component to update the childs component data
+
+----------------------------
+  Create Parent Function			
+----------------------------
+#- 1) we create a function inside the parent Component.
+#- 2) we give the <Project /> the prop that it will be passed through the parent Component <ProjectList />.
+#- 3) we create a function inside the <Project /> component 
+Extension:JSX --------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+
+//1)
+  export class ProjectList extends Component {
+  toggleProjectDescription(ProjectId){
+    console.log('this is the projectId: '+ProjectId);
+  }
+  ....
+  //2)
+   const projectsComponents = projects.map((project) => (
+      <Project 
+      key = {'project-'+project.id}
+      projectId = {project.id}
+      projectDesc = {project.desc}
+      onProjectHover = {this.toggleProjectDescription}
+      />
+      ...	
+  //3) 
+    
+    class Project extends Component {
+    toggleDescription(){
+      this.props.onProjectHover(this.props.id);
+    }
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+NOTE: that when you work with with regular function (i.e hello(){dothestuff}) when you call this.props you get undefiened because this binds to diffrent scops in javascript while it binds to the component in render() , we can solve this by:
+#- first by repalcing regulare function with arrow function, because arrow function bind to the class
+#- second by calling the constructor of the class and call the (super()) and bind the custom fucntion to this object like so 
+Extension:JS --------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+   constructor(props){
+    super(props);
+    this.toggleOnDescription =this.toggleOnDescription.bind(this);
+    this.toggleOffDescription = this.toggleOffDescription.bind(this);
+
+  }	
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+/*----------------------------
+**                           **
+**           STATE           **
+**                           **
+----------------------------*/
+----------------------------
+      using STATE			
+----------------------------
+#- state is owned by the component
+#- (this.state) is private to the  component and it can be updated with (this.setState).
+#- when the props or state of the component update, the component will re-render itself
+----------------------------
+   defining the init state			
+----------------------------
+#- in react the state is an object so it's a good practice to define the initial state in the component constructor
+#- first we init the state (in our example we do that by defining a Project Array inside the state()) of the parent component (ProjectList)
+#- then we tell react that when the component is monted to the page call the (setState()) inside a lifecycle method called (componentDidMount()) inside the (this.setState()) we give the empty array the array of projects 
+#- last we update our render() method to use our state like 
+Extension:JS ---------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+export class ProjectList extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      projects : []
+    }
+  }
+  componentDidMount(){
+    this.setState({projects : projects})
+  }
+  ...
+  render() {
+    const projectsComponents = this.state.projects.map((project) => (
+      <Project 
+      key = {'project-'+project.id}
+  ...
+  }		
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+
+-----------------------------------
+  Updating state and immutability			
+-----------------------------------
+
+#- for example let's say :
+
+________________________________
+this.state({nums : [1,3,2,4]});
+--------------------------------
+#- now we want to add a new number to that array
+_________________________________________________
+  this.setState({nums: this.state.nums.push(5)})
+-------------------------------------------------
+#- by doing so we said that state is immutable so this will also update the original array (nums)
+
+#- lets try an other approach 
+Extension:JS ---------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+  const nextNums = this.state.nums;
+  nextNums.push(4);
+  console.log(nextNums);
+  // [ 1, 2, 3, 4]
+  console.log(this.state.nums);
+  // [ 1, 2, 3, 4] <-- Nope!
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+#- this approach won't be a good practice either because by doing so we modify the original array because the new variable is referencing to the same memory when (this.state.nums) is stored
