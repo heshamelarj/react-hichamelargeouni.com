@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import { projects } from '../../../data/seed';
 import { projectsIterator } from '../../../data/iterators';
-let currentProject = projectsIterator(projects); 
+import cx from 'classnames'; //import the classname utility cx
 class SectionHeader extends Component {
   render() {
     return (
@@ -14,39 +14,63 @@ class SectionHeader extends Component {
   }
 }
 
+class InnerProject extends Component{
+  render(){
+    return(
+      <div className="project" onMouseOver={this.props.onProjectHover} onMouseLeave={this.props.onProjectLeave} id={"project_#" + this.props.projectId}>
+        <div className="project__thumbnail__container">
+          <img src={require(`../../../../img/bg_${this.props.projectId}.jpg`)} className="project__thumbnail__img" />
+        </div>
+        <div className="project-title">
+          <h3 className="project-tittle__header">{this.props.projectTitle}</h3>
+        </div>
+          <div className={this.props.classNames}>
+            <p>
+              {/*TODO: load description data for every project */}
+              {this.props.projectDesc}
+            <a href="#" className="project__thumbnail__button" >Read More</a>
+            </p>
+          </div>
+      </div>
+    );
+  }
+}
 class Project extends Component {
+
   //this is the easy fix to the problem of the bind 
   /*toggleDescription = () => {
      this.props.onProjectHover(this.props.projectId);
   }*/
-  toggleOnDescription() {
-    this.props.onProjectHover(this.props.projectId);
-   
+  
+  handleMouseOver() {   
+    this.setState({ isHovering: true });
   }
-  toggleOffDescription(){
-    this.props.onProjectLeave(this.props.projectId);
+  handleMouseLeave(){
+    this.setState({ isHovering: false });
   }
   constructor(props){
     super(props);
-    this.toggleOnDescription =this.toggleOnDescription.bind(this);
-    this.toggleOffDescription = this.toggleOffDescription.bind(this);
-
+    this.handleMouseOver = this.handleMouseOver.bind(this);
+    this.handleMouseLeave = this.handleMouseLeave.bind(this);
+    this.state = {
+      isHovering: false
+    }
   }
   render() {
+    var classes = cx([
+      this.state.isHovering && 'hover',
+      !this.state.isHovering && 'project__desc'
+    ])
     return (
-      
-      <div className="project" onMouseEnter={this.toggleOnDescription} onMouseLeave={this.toggleOffDescription} id={"project_#"+this.props.projectId}>
-        <div className="project__thumbnail__overlay">
-              <div className="project__desc hidden">
-                <p>
-                  {/*TODO: load description data for every project */}
-                  {this.props.projectDesc}
-                <a href="#" className="project__thumbnail__button" >More</a>
-                </p>
-              </div>
-        </div>
-      </div>
-      
+      <InnerProject 
+        projectId = {this.props.projectId}
+        projectTitle = {this.props.projectTitle}
+        projectDesc = {this.props.projectDesc}
+        projectImg = {this.props.imgUrl}
+       classNames = { cx(classes) } 
+        onProjectHover={this.handleMouseOver }
+        onProjectLeave={this.handleMouseLeave }
+      />
     );
   }
 }
@@ -55,50 +79,21 @@ export class ProjectList extends Component {
     super(props);
     this.state = {
       projects : []
+
     }
   }
   componentDidMount(){
     this.setState({projects : projects})
   }
-  toggleOnProjectDescription(projectId){
-    console.log(projectId);
-    let project = document.getElementById("project_#"+projectId);
-    console.log(project);
-    
-    let elementsList = new Array(project.childNodes);
-    let innerElement;
-    elementsList.forEach(element => {
-      innerElement = element[0].childNodes; 
-      if(innerElement[0].classList.contains('hidden')){
-        innerElement[0].classList.remove('hidden');
-      }
-      
-    });
-   
-   
-  }
-  toggleOffProjectDescription(projectId){
-    let project = document.getElementById("project_#" + projectId);
-    console.log(project);
-
-    let elementsList = new Array(project.childNodes);
-    let innerElement;
-    elementsList.forEach(element => {
-      innerElement = element[0].childNodes;
-      if (innerElement[0].classList.contains('project__desc')) {
-        innerElement[0].classList.add('hidden');
-      }
-
-    });
-  }
   render() {
+
     const projectsComponents = this.state.projects.map((project) => (
       <Project 
       key = {'project-'+project.id}
       projectId = {project.id}
+      projectTitle= {project.title}
       projectDesc = {project.desc}
-      onProjectHover = {this.toggleOnProjectDescription}
-      onProjectLeave = {this.toggleOffProjectDescription}
+      projectImg = {project.imgUrl}
       />
     ))
     return (

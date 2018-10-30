@@ -7,27 +7,32 @@ export const projects = [
   {
     id: 1,
     imgUrl: '../../img/bg.jpg',
-    desc: 'Project 1'
+    title: 'PROJECT 1',
+    desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam deleniti quos quod explicabo modi ? '
   },
   {
     id: 2,
     imgUrl: '../../img/bg_1.jpg',
-    desc: 'Project 2'
+    title: 'PROJECT 2',
+    desc: ' Consequatur necessitatibus dolore, eaque quae libero temporibus distinctio! Voluptatem ut fugit laudantium est  i'
   },
   {
     id: 3,
     imgUrl: '../../img/bg_2.jpg',
-    desc: 'Project 3 '
+    title: 'PROJECT 3',
+    desc: ' . Eligendi odit dolorem sequi neque, similique repudiandae eaque distinctio mollitia qui illo laudantium debitis. Recusandae '
   },
   {
     id: 4,
     imgUrl: '../../img/bg_3.jpg',
-    desc: 'Project 4'
+    title: 'PROJECT 4',
+    desc: ' sapiente debitis odit illo tempore ea tempora ab doloremque a nisi, quis iste ullam '
   },
   {
     id: 5,
     imgUrl: '../../img/bg_4.jpg',
-    desc: 'Project 5'
+    title: 'PROJECT 5',
+    desc: 'possimus quis ducimus, porro veritatis quos doloribus fuga minima et atque quia distinctio excepturi.  '
   }
 ];
 export const blogs = [

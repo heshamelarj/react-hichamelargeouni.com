@@ -15,11 +15,11 @@ class Blog extends Component{
   render(){
    
     return(
-      <div className="blog__body__grid__item-xs-12">
-        <div className="blog__inner__body">
+      <div className="post">
+        <div className="post__inner__body">
           {/* <Blog nextBlog={nextBlog.value}/> */}
-          <div className="blog__body__thumbnail">
-            <div className="blog__body__thumbnail__img">
+          <div className="post__body__thumbnail">
+            <div className="post__body__thumbnail__img">
               <img src={require(`../../../../img/bg_${this.props.blogId}.jpg`)} />
             </div>
             <div className="blog__body__content__header">
@@ -27,8 +27,8 @@ class Blog extends Component{
               <small>{this.props.blogDate}</small>
             </div>
           </div>
-          <div className="blog__body__centent">
-            <div className="blog__body__content__body">
+          <div className="post__body__centent">
+            <div className="post__body__content__body">
               <p>
                 {this.props.blogDesc}
                 <a href="#">Read More</a>
@@ -41,14 +41,25 @@ class Blog extends Component{
   }
 }
 class BlogList extends Component{
+  constructor(props){
+    super(props);
+    this.state= {
+      blogPosts: []
+    }
+  }
+  componentDidMount(){
+
+    const sortedPosts = blogs.sort((a,b)=> (
+      new Date(a.date) - new Date(b.date)
+      ));
+    this.setState({ blogPosts: sortedPosts})
+  }
+
   render(){
     // let nextBlog = currentBlog.next();
-    //we will sort blogs by date 
-    const blogsArray = blogs.sort((a,b)=> (
-      new Date(a.date) - new Date(b.date)
-    ));
-    const BlogComponents = blogsArray.map((blog) => (
-      <Blog 
+    
+    const BlogComponents = this.state.blogPosts.map((blog) => (
+    <Blog 
       key = {"blog-"+blog.id}
       blogId= {blog.id}
       blogImgUrl={blog.thumbnailImgUrl}

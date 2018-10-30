@@ -75,15 +75,6 @@
         transform: translateX(0em);
       }
     }
-//animate menu icon
-@keyframes bar-animate{
-  to{
-    stroke-dashoffset:0;
-  }
-  
-}
-
-
     //animate the close  menu icon
 @keyframes menu-first-bar-animate
 {
@@ -92,8 +83,8 @@
 
         }
   to{
-      transform: rotate(-30deg) translateY(.7em) translateX(.5em);
-      stroke-dashoffset: 0;
+      transform: rotate(-30deg) translateY(.7em) translateX(.7em);
+      stroke-dashoffset: -4;
       }
 }
 @keyframes menu-second-bar-animate
@@ -103,8 +94,8 @@
 
         }
   to{
-      transform: rotate(30deg) translateY(-.4em) translateX(-.7em);
-      stroke-dashoffset: 0;
+      transform: rotate(30deg) translateY(-.5em) translateX(-.8em);
+      stroke-dashoffset: -4;
       }
 }
 

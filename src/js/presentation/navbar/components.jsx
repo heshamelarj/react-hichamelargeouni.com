@@ -1,37 +1,56 @@
 import React, { Component } from "react";
-export class ResponsiveMenu extends Component{
-  render() {
-    return (
-      <div className="menu__fullscreen " id="menu__fullscreen">	
-				<div className="menu__fullscreen--close">
-					<a className="menu__fullscreen__menu--close" id="closeFullscreenMenu" dangerouslySetInnerHTML = {{__html :'<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="70px" height="43px" viewBox="0 0 70 43" enable-background="new 0 0 70 43" xml:space="preserve"> <rect id="rect" x="1" y="1" fill="none" stroke="#C68952" stroke-width="2" stroke-miterlimit="10" width="68" height="41"/> <g class="menu-bars"> <line id="bar-3" fill="none" stroke="#C68952" stroke-width="5" stroke-miterlimit="10" x1="6" y1="11.5" x2="64" y2="11.5"/> <line id="bar-2" fill="none" stroke="#C68952" stroke-width="5" stroke-miterlimit="10" x1="6" y1="21.5" x2="64" y2="21.5"/> <line id="bar-1" fill="none" stroke="#C68952" stroke-width="5" stroke-miterlimit="10" x1="6" y1="31.5" x2="64" y2="31.5"/> </g> </svg>'}}></a>
-				</div>			
-				<div id="menuDropDown" className="menu__fullscreen__body">
-						 <nav className="menu__fullscreen__nav">
-							 <ul className="menu__fullscreen__inner__nav">
-									 <li className="menu__fullscreen__inner__nav__item">
-											 <a href="#about" className="menu__fullscreen__inner__nav__link">ABOUT</a>
-										</li>							
-										<li className="menu__fullscreen__inner__nav__item">
-												 <a href="#work" className="menu__fullscreen__inner__nav__link">WORK</a>
-										</li>
-										<li className="menu__fullscreen__inner__nav__item">
-												 <a href="#blog" className="menu__fullscreen__inner__nav__link">BLOG</a>
-										</li>
-										<li className="menu__fullscreen__inner__nav__item">
-												 <a href="#contact" className="menu__fullscreen__inner__nav__link">CONTACT</a>
-										</li>
-							 </ul>
-						 </nav>
-				</div>
-    </div>
+import cx from 'classnames';
+class MenuIconInner extends Component{
+  render(){
+    return(
+      <a className="menu" id="iconMenu" onClick={this.props.showMenu} >
+        <li className = {this.props.closeMenuIconClass} dangerouslySetInnerHTML={{ __html: '<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="70px" height="43px" viewBox="0 0 70 43" enable-background="new 0 0 70 43" xml:space="preserve"> <g class="menu-bars"> <line id="bar-3" fill="none" stroke="#333233" stroke-width="5" stroke-miterlimit="10" x1="6" y1="11.5" x2="64" y2="11.5"/> <line id="bar-2" fill="none" stroke="#333233" stroke-width="5" stroke-miterlimit="10" x1="6" y1="21.5" x2="64" y2="21.5"/> <line id="bar-1" fill="none" stroke="#333233" stroke-width="5" stroke-miterlimit="10" x1="6" y1="31.5" x2="64" y2="31.5"/> </g> </svg>' }}>
+        </li>
+      </a>
     );
   }
 }
+class MenuIcon extends Component{
+  constructor(props){
+    super(props);
+  }
+  //methods
+
+ 
+  render(){
+    return(
+      <MenuIconInner 
+      navigateToMenu = {this.handleClick}
+      showMenu = {this.props.MenuCLicked}
+      closeMenuIconClass = {this.props.closeMenuIconClass}
+      />
+    );
+  }
+}
+class NavbarItems extends Component{
+  render(){
+    return(
+      <div className={this.props.className}>
+        <li className="header__nav__item">
+          <a href="#about" className="header__nav__item__link">ABOUT</a>
+        </li>
+        <li className="header__nav__item">
+          <a href="#work" className="header__nav__item__link">WORK</a>
+        </li>
+        <li className="header__nav__item">
+          <a href="#blog" className="header__nav__item__link">BLOG</a>
+        </li>
+        <li className="header__nav__item">
+          <a href="#contact" className="header__nav__item__link">CONTACT</a>
+        </li>
+      </div>
+    );
+  }
+}
+
 class Logo extends Component {
   render(){
     return (
-      <React.Fragment>
         <div className = "logo" >
           <li className = "header__nav__item__logo" >
           {/* //TODO: manage route to index */}
@@ -42,35 +61,112 @@ class Logo extends Component {
             </a> 
           </li>
         </div>
-              <li className="header__nav__item">
-                  <a href="#" className="header__nav__item__link">ABOUT</a>
-                </li>
-                <li className="header__nav__item">
-                  <a href="#" className="header__nav__item__link">BLOG</a>
-                </li>
-                <li className="header__nav__item">
-                  <a href="#" className="header__nav__item__link">WORK</a>
-                </li>
-                <li className="header__nav__item">
-                  <a href="#" className="header__nav__item__link">CONTACT</a>
-                </li>
-                <a className="menu" id="iconMenu">
-                  <li className="header__nav__item__menu" dangerouslySetInnerHTML = {{__html :'<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="70px" height="43px" viewBox="0 0 70 43" enable-background="new 0 0 70 43" xml:space="preserve"> <g class="menu-bars"> <line id="bar-3" fill="none" stroke="#333233" stroke-width="5" stroke-miterlimit="10" x1="6" y1="11.5" x2="64" y2="11.5"/> <line id="bar-2" fill="none" stroke="#333233" stroke-width="5" stroke-miterlimit="10" x1="6" y1="21.5" x2="64" y2="21.5"/> <line id="bar-1" fill="none" stroke="#333233" stroke-width="5" stroke-miterlimit="10" x1="6" y1="31.5" x2="64" y2="31.5"/> </g> </svg>'}}>
-                  </li>
-                </a>
-      </React.Fragment>
     );
   }
 }
-export class Navbar extends Component {
+class NavbarInner extends Component {
   render(){
     return (
-         <nav className="header">
-          <ul className = "header__nav" >
+      <div className={this.props.fullscreenMenuClass} id="menu__fullscreen" >
+        <nav className="header menu__fullscreen__nav">
+          <ul className= "menu__fullscreen__inner__nav header__nav" >
             <Logo />
-          
+            <NavbarItems className = {this.props.navbarItemsClass} />
+            <MenuIcon 
+            MenuCLicked = {this.props.handleMenuClickEvent} 
+            closeMenuIconClass = {this.props.closeMenuIconClass}
+            />
           </ul>
         </nav>
+      </div>
+    );
+  }
+}
+export class Navbar extends Component{
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      isOnSmallScreen: false, 
+      isWindowOnTop: true,
+      isMenuClicked: false,
+      isCloseMenuClicked: false
+    }
+  }
+   changeShapeOfMenuIconToCloseIcon = (inIsClicked) => {
+    return cx([
+        inIsClicked && 'close-icon '  
+      ]);
+  }
+  handleScreenWithAndWindowsVerticalPosition = () => {
+    //this handles the navbarItems style if small screen hide navbar items
+    //and when mennu is clicked show the menu on fullwith and hight
+    if (window.innerWidth <= 576) {
+      //then we are on small devices
+      this.setState({
+        isOnSmallScreen: true,
+        isMenuClicked: true
+      })
+    }
+    //when click the menu icon we scroll to Y=0
+    //first we check if the windows Y position is not 0
+    if (window.pageYOffset > 0) {
+      this.setState({
+        isWindowOnTop: false
+      })
+    }
+    //check if the close menu icon was clicked
+    if(this.changeShapeOfMenuIconToCloseIcon(this.state.isMenuClicked) != ''){
+      this.setState({
+        isCloseMenuClicked: true,
+      })
+    }
+  }
+
+  makeNavbarItemsForSmallScreen = (isOnSmallScreen, windowPosition, isCloseMenuClicked) => {
+  
+    if (isOnSmallScreen && !isCloseMenuClicked) {
+      return cx([
+        'displayed'
+      ]);
+    } else if (!isOnSmallScreen || isCloseMenuClicked){
+      return cx([
+        'hidden'
+      ]);
+    }
+    
+    if (!windowPosition) {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      })
+    }
+  }
+  toggleFullscreenMenuOn = (isOnSmallScreen, isCloseMenuClicked) => {
+    if(isOnSmallScreen && !isCloseMenuClicked){
+      return cx([
+        isOnSmallScreen && 'fullscreen-menu'
+      ])
+    } else if (isOnSmallScreen && isCloseMenuClicked){
+      return cx([
+        isOnSmallScreen && ' '
+      ])
+    }
+  }
+  render(){
+    const closeMenuClasses = this.changeShapeOfMenuIconToCloseIcon(this.state.isMenuClicked);
+    const navbarItemsClasses = this.makeNavbarItemsForSmallScreen(this.state.isOnSmallScreen, this.state.isWindowOnTop,this.state.isCloseMenuClicked);
+    console.log("isCloseMenuState: "+this.state.isCloseMenuClicked);
+    console.log("navbarItemsCLass: "+navbarItemsClasses);
+    const menuClasses = this.toggleFullscreenMenuOn(this.state.isOnSmallScreen, this.state.isCloseMenuClicked);
+
+    return(
+      <NavbarInner 
+        navbarItemsClass = {navbarItemsClasses}
+      handleMenuClickEvent = {this.handleScreenWithAndWindowsVerticalPosition}
+      fullscreenMenuClass = {menuClasses}
+        closeMenuIconClass = {closeMenuClasses}
+      />
     );
   }
 }

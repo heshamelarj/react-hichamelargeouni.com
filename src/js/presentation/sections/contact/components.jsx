@@ -55,10 +55,10 @@ class ContactBody extends Component{
 export class SectionContact extends Component{
   render(){
     return(
-      <React.Fragment>
+      <section className="contact section" id="contact">
         <SectionHeader />
         <ContactBody />
-      </React.Fragment>
+      </section>
     );
   }
 }

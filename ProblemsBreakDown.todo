@@ -1,0 +1,17 @@
+/*----------------------------
+**                           **
+**          PROBLEM          **
+**                           **
+----------------------------*/
+- 1) make the NavbarItem hidden in small screens.
+- 2) when click on menu icon the big menu should appear with logo and close-icon.
+- 3) when fullwidthandheight menu appears i want to transform the menu humberger icon to a X icon.
+- 4) when click on X or any one of the navigation items fullwidthandheight menu should disapear. 
+----------------------------
+      SOLUTION STEPS			
+----------------------------
+-1 add a hidden class to the NavbarItem when the component renders for the first time
+    --> and to do that there is two possibly three approaches
+    1.a. add the class .hidden to the component hard-coded way.
+    1.b. find a way to add the class using conditionals in the component.
+    1.c. add the <react-responsive> plugin to check the media query and add class based on that.
