@@ -20,10 +20,10 @@ class Blog extends Component{
           {/* <Blog nextBlog={nextBlog.value}/> */}
           <div className="post__body__thumbnail">
             <div className="post__body__thumbnail__img">
-              <img src={require(`../../../../img/bg_${this.props.blogId}.jpg`)} />
+              <img src={require(`../../../../img/bg_${this.props.blogId}.jpg`)} alt="post thumnail"/>
             </div>
             <div className="blog__body__content__header">
-              <a> <h4>{this.props.blogTitle}</h4> </a>
+              <a href="#blogtitle"> <h4>{this.props.blogTitle}</h4> </a>
               <small>{this.props.blogDate}</small>
             </div>
           </div>
@@ -31,7 +31,7 @@ class Blog extends Component{
             <div className="post__body__content__body">
               <p>
                 {this.props.blogDesc}
-                <a href="#">Read More</a>
+                <a href="#readmore">Read More</a>
               </p>
             </div>
           </div>

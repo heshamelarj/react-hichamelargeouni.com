@@ -5,7 +5,7 @@ class AboutMePicture extends Component {
     return (
       <div className="about__grid__item-xs-4">
         <div className="about__img">
-          <img src={require('../../../../img/aboutMePicture.jpg')} />
+          <img alt="" src={require('../../../../img/aboutMePicture.jpg')} />
         </div>
       </div>
     );

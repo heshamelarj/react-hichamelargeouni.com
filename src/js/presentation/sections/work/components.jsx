@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import { projects } from '../../../data/seed';
-import { projectsIterator } from '../../../data/iterators';
 import cx from 'classnames'; //import the classname utility cx
 class SectionHeader extends Component {
   render() {
@@ -19,7 +18,7 @@ class InnerProject extends Component{
     return(
       <div className="project" onMouseOver={this.props.onProjectHover} onMouseLeave={this.props.onProjectLeave} id={"project_#" + this.props.projectId}>
         <div className="project__thumbnail__container">
-          <img src={require(`../../../../img/bg_${this.props.projectId}.jpg`)} className="project__thumbnail__img" />
+          <img src={require(`../../../../img/bg_${this.props.projectId}.jpg`)} className="project__thumbnail__img" alt="project thumbnail" />
         </div>
         <div className="project-title">
           <h3 className="project-tittle__header">{this.props.projectTitle}</h3>
@@ -28,8 +27,8 @@ class InnerProject extends Component{
             <p>
               {/*TODO: load description data for every project */}
               {this.props.projectDesc}
-            <a href="#" className="project__thumbnail__button" >Read More</a>
             </p>
+            <a href="#readmore" className="project__thumbnail__button" >Read More</a>
           </div>
       </div>
     );
@@ -110,7 +109,7 @@ export class WorkBody extends Component {
     return (
       <div className="work__body">
         <div className="work__body__header">
-          <p>my work is a collection of <a href="#"><strong>fron-end</strong></a> 	projects using languages such as <a href="#"><strong>HTML5</strong></a>, <a href=""><strong>CSS3</strong></a> and <a href="#"><strong>JAVASCRIPT</strong></a>  and Frameworks as <a href="#"><strong>VueJs</strong></a>, <a href="#"><strong>Bootstrap 4</strong></a> and <a href="#"><strong>Semantic-ui</strong></a> and also <a href="#"><strong>Back-end</strong> </a> projects using languages : <a href="#"><strong>PHP</strong></a>, <a href="#"><strong>Ruby</strong></a> using Frameworks like <a href="#"><strong>Laravel</strong></a> and <a href="#"><strong>Ruby On Rails</strong></a> </p>
+          <p>my work is a collection of <a href="#frontend"><strong>fron-end</strong></a> 	projects using languages such as <a href="#html"><strong>HTML5</strong></a>, <a href="#css3"><strong>CSS3</strong></a> and <a href="#js"><strong>JAVASCRIPT</strong></a>  and Frameworks as <a href="#something"><strong>VueJs</strong></a>, <a href="#something"><strong>Bootstrap 4</strong></a> and <a href="#something"><strong>Semantic-ui</strong></a> and also <a href="#something"><strong>Back-end</strong> </a> projects using languages : <a href="#something"><strong>PHP</strong></a>, <a href="#something"><strong>Ruby</strong></a> using Frameworks like <a href="#something"><strong>Laravel</strong></a> and <a href="#something"><strong>Ruby On Rails</strong></a> </p>
         </div>
         <ProjectList />
 

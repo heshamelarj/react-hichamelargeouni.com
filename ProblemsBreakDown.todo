@@ -4,9 +4,10 @@
 **                           **
 ----------------------------*/
 - 1) make the NavbarItem hidden in small screens.
-- 2) when click on menu icon the big menu should appear with logo and close-icon.
-- 3) when fullwidthandheight menu appears i want to transform the menu humberger icon to a X icon.
-- 4) when click on X or any one of the navigation items fullwidthandheight menu should disapear. 
+- 2) when click on menu icon the big menu should appear with logo and close-icon.|||||DONE|||||
+- 3) when fullwidthandheight menu appears i want to transform the menu humberger icon to a X icon.|||||DONE|||||
+- 4) when click on X or any one of the fullwidthandheight menu should disapear. |||||DONE|||||
+- 5) when click on navigation items fullwidthandheight menu should disapear and should navigate to the target section. 
 ----------------------------
       SOLUTION STEPS			
 ----------------------------
@@ -15,3 +16,13 @@
     1.a. add the class .hidden to the component hard-coded way.
     1.b. find a way to add the class using conditionals in the component.
     1.c. add the <react-responsive> plugin to check the media query and add class based on that.
+...
+-5 add the each nav link an onClick={} so when i click on it does the following
+    4.a. hide the fullwidth menu. |||||DONE|||||
+    4.b. remove the class (.close-icon) from the menu. |||||DONE|||||
+    4.c. navigate to the target section smoothly.
+/*----------------------------
+**                           **
+**          PROBLEM          **
+**                           **
+----------------------------*/
