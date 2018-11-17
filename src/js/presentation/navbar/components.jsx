@@ -26,20 +26,21 @@ class MenuIcon extends Component{
   }
 }
 class NavbarItems extends Component{
+  
   render(){
     return(
       <div className={this.props.className}>
         <li className="header__nav__item" onClick={this.props.clickNavbarLink}>
-          <a href="#about" className="header__nav__item__link">ABOUT</a>
+          <a href="#about" className="header__nav__item__link" >ABOUT</a>
         </li>
         <li className="header__nav__item" onClick={this.props.clickNavbarLink}>
-          <a href="#work" className="header__nav__item__link">WORK</a>
+          <a href="#work" className="header__nav__item__link" >WORK</a>
         </li>
         <li className="header__nav__item" onClick={this.props.clickNavbarLink}>
-          <a href="#blog" className="header__nav__item__link">BLOG</a>
+          <a href="#blog" className="header__nav__item__link" >BLOG</a>
         </li>
         <li className="header__nav__item" onClick={this.props.clickNavbarLink}>
-          <a href="#contact" className="header__nav__item__link">CONTACT</a>
+          <a href="#contact" className="header__nav__item__link" >CONTACT</a>
         </li>
       </div>
     );
@@ -121,15 +122,12 @@ export class Navbar extends Component{
                                             this.state.isWindowOnTop,
                                             this.state.isCloseMenuClicked ,
                                             this.state.isNavbarLinkClicked) === 'hidden' &&
-                                            this.state.isNavbarLinkClicked ){
-        
+                                            this.state.isNavbarLinkClicked ){ 
       this.setState({
         //initialising navbarlink after being clicked
         isNavbarLinkClicked: false
       })  
       }
-
-
   }
   handleNavbarLinksClick = () =>{
     if(!this.state.isNavbarLinkClicked){
@@ -139,9 +137,9 @@ export class Navbar extends Component{
       })
       
     }
-    
+    //TODO: add smooth scrooling when navlink clicked 
   }
-  
+ 
   changeShapeOfMenuIconToCloseIcon = (inIsClicked, isCloseMenuClicked, isNavbarLinkClicked) => {
     if (inIsClicked && !isCloseMenuClicked && !isNavbarLinkClicked)
     {

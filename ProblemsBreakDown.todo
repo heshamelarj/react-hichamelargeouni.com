@@ -18,9 +18,13 @@
     1.c. add the <react-responsive> plugin to check the media query and add class based on that.
 ...
 -5 add the each nav link an onClick={} so when i click on it does the following
-    4.a. hide the fullwidth menu. |||||DONE|||||
-    4.b. remove the class (.close-icon) from the menu. |||||DONE|||||
-    4.c. navigate to the target section smoothly.
+    5.a. hide the fullwidth menu. |||||DONE|||||
+    5.b. remove the class (.close-icon) from the menu. |||||DONE|||||
+    5.c. navigate to the target section smoothly.
+    5.c.1. difficulties are :
+        5.c.1.a   - need to get the target section id
+                  - need to get the section Y coordinates 
+                  - then scroll to the section   
 /*----------------------------
 **                           **
 **          PROBLEM          **
